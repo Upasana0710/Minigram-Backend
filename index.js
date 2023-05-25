@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import compression from 'compression'
-import helmet from 'helmet'
 import userRoutes from './src/routes/user.js';
 import postRoutes from './src/routes/post.js';
 import commentRoutes from './src/routes/comments.js';
@@ -26,7 +25,6 @@ const corsConfig={
 };
 
 app.use(compression());
-app.use(helmet());
 app.use(cors(corsConfig));
 
 app.use(express.json({limit: '50mb'}));
