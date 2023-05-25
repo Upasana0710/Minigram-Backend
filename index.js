@@ -21,7 +21,8 @@ mongoose.connect(process.env.CONNECTION_URL)
 
 const corsConfig={
     credentials: "true",
-    origin: "true"
+    origin: "http://localhost:3000",
+    optionSuccessStatus: "200",
 };
 
 app.use(compression());
