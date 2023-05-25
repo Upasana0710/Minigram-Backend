@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema({
     },
     address: String,
     age: {
-        type: Number,
-        required: true
+        type: String,
+        default: "",
     },
     gender: String,
     profilePic: {
