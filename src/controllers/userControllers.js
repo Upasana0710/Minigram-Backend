@@ -94,3 +94,14 @@ export const deleteUser = async(req, res) => {
         res.json({message: error.message});
     }
 }
+export const searchUser = async (req, res, next) => {
+    const query = req.query.n;
+    try {
+      const user = await User.find({
+        name: { $regex: query, $options: "i" },
+      }).populate("posts").limit(40);
+      res.status(200).json(user);
+    } catch (err) {
+      next(err);
+    }
+  };
