@@ -20,7 +20,7 @@ export const createPost = async (req, res) => {
 export const getPosts = async (req, res) => {
 
     try{
-        const posts = await Post.find();
+        const posts = await Post.find().populate("creator").populate("likes").populate("comments");
 
         res.status(200).json(posts);
     }catch(error){
