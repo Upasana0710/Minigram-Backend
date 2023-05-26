@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.post('/signup',signup);
 router.post('/signin',signin);
+router.get('/search',searchUser);
 router.get('/',getUsers);
 router.get('/:id',getUser);
 router.patch('/:id',updateUser);
 router.delete('/:id',deleteUser);
-router.get('/search',searchUser);
 
 export default router;

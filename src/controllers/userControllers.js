@@ -94,7 +94,7 @@ export const deleteUser = async(req, res) => {
         res.json({message: error.message});
     }
 }
-export const searchUser = async (req, res, next) => {
+export const searchUser = async (req, res) => {
     const query = req.query.n;
     try {
       const user = await User.find({
@@ -102,6 +102,7 @@ export const searchUser = async (req, res, next) => {
       }).populate("posts").limit(40);
       res.status(200).json(user);
     } catch (err) {
-      next(err);
+      console.log(err);
+      res.json({message: err.message});
     }
   };
