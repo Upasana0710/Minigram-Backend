@@ -28,6 +28,18 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getByFilters = async (req, res, next) => {
+    const query = req.query.q;
+    try {
+        const post = await Post.find({ 
+        filter: { $regex: query, $options: "i" },
+        }).populate("creator").populate("likes").populate("comments");
+        res.status(200).json(post);
+    } catch (err) {
+        next(err);
+    }
+}
+
 export const updatePost = async (req,res) => {
 
     try{
