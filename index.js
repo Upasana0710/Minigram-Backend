@@ -17,7 +17,7 @@ const app = express();
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: "https://pixiegram.netlify.app/",
+    origin: "http://localhost:3000",
   },
 });
 
@@ -34,7 +34,7 @@ mongoose.connect(process.env.CONNECTION_URL)
 
 const corsConfig={
     credentials: "true",
-    origin: "true",
+    origin: "http://localhost:3000",
     optionSuccessStatus: "200",
 };
 
