@@ -36,6 +36,11 @@ const userSchema = new mongoose.Schema({
         references: "postSchema",
         default: []
     },
+    favourites: {
+        type: [mongoose.Schema.Types.ObjectId],
+        references: "postSchema",
+        default: [],
+    },
     createdAt: {
         type: Date,
         default: new Date()
