@@ -79,7 +79,7 @@ export const deletePost = async (req, res) => {
 }
 
 export const likePost = async (req, res) => {
-    const id = req.query.p;
+    const postid = req.query.p;
     const userid = req.query.u;
 
     if (!req.user) return res.json({ message: 'Unauthenticated.' });
@@ -87,34 +87,24 @@ export const likePost = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(userid))
         return res.status(404).json({ message: 'No post with this id' });
 
-
-    const post = await Post.findById(id);
-
+    const post = await Post.findById(postid);
     if (!post) {
         return res.status(404).json({ message: 'No post found with this id' });
     }
 
-    const index = post.likes.findIndex((id) => id === String(req.user));
-
     const user = await User.findById(userid);
-
-    const favourites = user.favourites;
-
-    const updatedFavourites = [...favourites, id];
-
-    await User.findByIdAndUpdate(
-        userid,
-        { ...user, favourites: updatedFavourites },
-        { new: true }
-    );
-
-    if (index === -1) {
-        post.likes.push(req.user);
+    
+    let updatedPost;
+    if (!post.likes.includes(userid)) {
+        updatedPost = await Post.findByIdAndUpdate(postid, {$push: {likes: userid}},{ new: true })
     } else {
-        post.likes = post.likes.filter((id) => id !== String(req.user));
+        updatedPost = await Post.findByIdAndUpdate(postid, {$pull: {likes: userid}},{ new: true })
     }
-
-    const updatedPost = await Post.findByIdAndUpdate(id, post, { new: true });
+    if(!user.favourites.includes(postid)){
+         await User.findByIdAndUpdate(userid, {$push: {favourites: postid}},{ new: true })
+    }else{
+        await User.findByIdAndUpdate(userid, {$pull: {favourites: postid}},{ new: true })
+    }
 
     res.json(updatedPost);
 };
