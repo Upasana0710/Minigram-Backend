@@ -20,7 +20,7 @@ export const getConversation = async (req, res) => {
         const user = req.params.id;
         const conversation = await Conversation.find({
             members: {$in: [user]},
-        },{ _id: 0 })
+        })
         res.status(200).json(conversation);
     }catch(error){
         res.status(500).json(error);
