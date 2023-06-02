@@ -29,6 +29,16 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getPost = async(req, res) => {
+    const {id} = req.params;
+    try{
+        const post = await Post.findById(id).populate("likes");
+        res.status(200).json(post);
+    }catch(error){
+        console.log(error);
+    }
+}
+
 export const getByFilters = async (req, res, next) => {
     const query = req.query.q;
     try {
