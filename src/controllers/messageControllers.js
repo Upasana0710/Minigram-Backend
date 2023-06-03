@@ -22,7 +22,7 @@ export const getMessages = async (req, res) => {
         const messages = await Messages.find({
             conversationId: convId
         });
-        res.json(messages);
+        res.json({messages:messages});
     }catch(error){
         console.log(error);
         res.json(error);
