@@ -5,7 +5,7 @@ export const createMessage = async (req, res) => {
     try{
         const message = req.body;
 
-        const newMessage = new Messages({...message, sender: req.user});
+        const newMessage = new Messages({...message});
         
         const savedMessage = await newMessage.save();
 
