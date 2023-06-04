@@ -9,7 +9,7 @@ export const createMessage = async (req, res) => {
         
         const savedMessage = await newMessage.save();
 
-        res.json(newMessage);
+        res.json(savedMessage);
     }catch(error){
         console.log(error);
         res.json(error);
