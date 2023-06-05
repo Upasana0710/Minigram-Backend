@@ -8,8 +8,8 @@ const postSchema = new mongoose.Schema({
         required: true,
     },
     selectedFile: {
-        type: [String],
-        required: true
+        type: String,
+        default: '',
     },
     filter: {
         type: String,
