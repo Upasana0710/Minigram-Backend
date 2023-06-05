@@ -4,7 +4,7 @@ import {auth} from '../middleware/user/auth.js'
 
 const router = express.Router();
 
-router.post('/',[auth],createPost);
+router.post('/',createPost);
 router.get('/search',getByFilters);
 router.get('/',getPosts);
 router.get('/:id',getPost);

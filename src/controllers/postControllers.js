@@ -6,7 +6,7 @@ export const createPost = async (req, res) => {
     const post = req.body;
 
     try {
-        const newPost = new Post({ ...post, creator: req.user });
+        const newPost = new Post({ ...post });
 
         await newPost.save();
 
